@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Tempo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* Fundo gradiente */
+            font-family: 'Montserrat', sans-serif; /* Fonte elegante */
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.1); /* Fundo branco semitransparente */
+            backdrop-filter: blur(10px); /* Efeito de desfoque */
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+            overflow: hidden; /* Garante que a imagem fique dentro do contêiner */
+        }
+
+        .container:hover {
+            transform: scale(1.05); /* Zoom suave ao passar o mouse */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7); /* Sombra mais intensa */
+        }
+
+        .image-box {
+            width: 40%; /* Redimensiona a imagem para uma proporção melhor */
+            text-align: center;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Padrão no fundo */
+            background-color: #fff; /* Fundo branco */
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra na imagem */
+            overflow: hidden; /* Garante que a imagem fique dentro do contêiner */
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto; /* Ajusta a imagem para manter a proporção */
+            border-radius: 10px;
+        }
+
+        .text-box {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo branco semitransparente */
+            backdrop-filter: blur(10px); /* Efeito de desfoque */
+            padding: 20px;
+            border-radius: 20px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra no texto */
+        }
+
+        h1 {
+            color: #f39c12; /* Cor do título */
+            font-size: 2em;
+            margin: 0;
+        }
+
+        #time-container {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #ecf0f1; /* Cor do texto dentro do quadrado */
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Animação de transição dos valores do contador */
+        #time-container span {
+            display: inline-block;
+            animation: count 1s ease infinite;
+        }
+
+        @keyframes count {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .text-box, .image-box {
+                width: 100%;
+                height: auto;
+            }
+
+            #time-container {
+                font-size: 1.2em;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-box">
+           <img src="japa/IMG_2468.jpg"alt="Imagem personalizada">
+        </div>
+        <div class="text-box">
+            <h1>Contador de Tempo desde o Primeiro Encontro ❤️</h1>
+            <div id="time-container">
+                <span id="days">0</span> Dias,
+                <span id="hours">0</span> Horas,
+                <span id="minutes">0</span> Minutos,
+                <span id="seconds">0</span> Segundos
+            </div>
+        </div>
+    </div>
+    <script>
+        const firstDate = new Date('2024-09-21T23:10:00'); // Insira a data do seu primeiro encontro aqui
+
+        function updateTime() {
+            const now = new Date();
+            const timeDifference = now - firstDate;
+
+            const seconds = Math.floor((timeDifference / 1000) % 60);
+            const minutes = Math.floor((timeDifference / 1000 / 60) % 60);
+            const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        updateTime(); // Chama a função imediatamente para atualizar os valores
+        setInterval(updateTime, 1000); // Atualiza a cada segundo
+    </script>
+</body>
+</html>
